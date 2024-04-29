@@ -1,0 +1,226 @@
+<div class="notification-box" (click)="notification()">
+  <svg>
+    <use href="assets/svg/icon-sprite.svg#notification-header"></use>
+  </svg><span class="badge rounded-pill badge-secondary">4 </span>
+</div>
+<div class="onhover-show-div notification-dropdown" [ngClass]="{'active' : notifications == true}">
+  <div class="card mb-0">
+    <div class="card-header">
+      <div class="common-space">
+        <h4 class="text-start f-w-600">Notitications</h4>
+        <div><span>4 New</span></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="notitications-bar">
+        <ul class="nav nav-pills nav-primary p-0" id="pills-tab" role="tablist">
+          <li class="nav-item p-0">
+            <a class="nav-link active" id="pills-aboutus-tab" [ngClass]="{'active show': openTab == 'all'}"
+              href="javascript:void(0)" role="tab" (click)="tabbed('all')">
+              All(3)
+            </a>
+          </li>
+          <li class="nav-item p-0">
+            <a class="nav-link" id="pills-contactus-tab" [ngClass]="{'active show': openTab == 'Messages'}"
+              href="javascript:void(0)" role="tab" (click)="tabbed('Messages')">
+              Messages</a>
+          </li>
+          <li class="nav-item p-0">
+            <a class="nav-link" id="pills-blog-tab" [ngClass]="{'active show': openTab == 'Cart'}"
+              href="javascript:void(0)" role="tab" (click)="tabbed('Cart')">
+              Cart </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" [ngClass]="{'show active': openTab == 'all'}">
+            <!-- <app-all-user></app-all-user> -->
+
+            <div class="user-message" > 
+             
+              <ul> 
+                <ng-container *ngFor="let item of talentNotificationList">
+
+                <li *ngIf=" item.IsFor === 'AddInterview'">
+                  <div class="d-flex w-100 notification-data justify-content-center align-items-center gap-2">
+                    <div class="user-alerts flex-shrink-0">
+                      <a class="f-w-500 f-12" [routerLink]="['/Chat/private-chat']">Round : {{item.Interview_Dropdown_Name}}</a>
+
+                        <!-- <img class="rounded-circle img-fluid img-40" src="assets/images/dashboard/user/7.jpg" alt="user" /> -->
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="common-space user-id w-100">
+                            <div class="common-space w-100">
+                            </div>
+                        </div>
+                        <div><span class="f-w-500 f-light f-12">Name : </span>  {{item.UserName}}</div>
+                    </div><span class="f-light f-w-500 f-12">Date :{{item.CreatedDate | date:"dd MMM, yyyy"}} </span>
+                </div>
+
+                  <div class="user-alerts">     
+
+                    <div class="user-name">
+                      <div> 
+                    <div class="f-w-500 f-14" ></div>
+
+                        <h6><a class="f-w-500 f-14" ></a></h6>
+                        <span class="f-w-500 f-14" ></span>
+                      </div>
+                      <!-- <div> 
+                        <svg>
+                          <use href="assets/svg/icon-sprite.svg#more-vertical"></use>
+                        </svg>
+                      </div> -->
+                    </div>
+                  </div>
+                </li>
+                <!-- <li>
+                  <div class="user-alerts"><img class="user-image rounded-circle img-fluid me-2" src="assets/images/dashboard/user/6.jpg" alt="user"/>
+                    <div class="user-name">
+                      <div> 
+                        <h6><a class="f-w-500 f-14" [routerLink]="['/user/users-profile']">Dianne Russell</a></h6><span class="f-light f-w-500 f-12">So, what is my next work ?</span>
+                      </div>
+                      <div> 
+                        <svg>
+                          <use href="assets/svg/icon-sprite.svg#more-vertical"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </li> -->
+                </ng-container>
+              </ul>
+            </div>
+            
+          </div>
+          <div class="tab-pane fade" id="pills-contactus" [ngClass]="{'show active': openTab == 'Messages'}">
+            <!-- <app-messages></app-messages> -->
+            <div class="notification-card">
+              <ul>
+                  <li class="notification d-flex w-100 justify-content-between align-items-center">
+                      <div class="d-flex w-100 notification-data justify-content-center align-items-center gap-2">
+                          <div class="user-alerts flex-shrink-0">
+                              <img class="rounded-circle img-fluid img-40" src="assets/images/dashboard/user/3.jpg" alt="user" />
+                          </div>
+                          <div class="flex-grow-1">
+                              <div class="common-space user-id w-100">
+                                  <div class="common-space w-100">
+                                      <a class="f-w-500 f-12" [routerLink]="['/Chat/private-chat']">Robert D. Hambly</a>
+                                  </div>
+                              </div>
+                              <div><span class="f-w-500 f-light f-12">Hello Miss...😊</span></div>
+                          </div><span class="f-light f-w-500 f-12">44 sec</span>
+                      </div>
+                  </li>
+                  <li class="notification d-flex w-100 justify-content-between align-items-center">
+                      <div class="d-flex w-100 notification-data justify-content-center align-items-center gap-2">
+                          <div class="user-alerts flex-shrink-0">
+                              <img class="rounded-circle img-fluid img-40" src="assets/images/dashboard/user/7.jpg" alt="user" />
+                          </div>
+                          <div class="flex-grow-1">
+                              <div class="common-space user-id w-100">
+                                  <div class="common-space w-100">
+                                      <a class="f-w-500 f-12" [routerLink]="['/Chat/private-chat']">Courtney C. Strang</a>
+                                  </div>
+                              </div>
+                              <div><span class="f-w-500 f-light f-12">Wishing You a Happy Birthday Dear.. 🥳🎊</span></div>
+                          </div><span class="f-light f-w-500 f-12">52 min</span>
+                      </div>
+                  </li>
+                  <li class="notification d-flex w-100 justify-content-between align-items-center">
+                      <div class="d-flex w-100 notification-data justify-content-center align-items-center gap-2">
+                          <div class="user-alerts flex-shrink-0">
+                              <img class="rounded-circle img-fluid img-40" src="assets/images/dashboard/user/5.jpg" alt="user" />
+                          </div>
+                          <div class="flex-grow-1">
+                              <div class="common-space user-id w-100">
+                                  <div class="common-space w-100">
+                                      <a class="f-w-500 f-12" [routerLink]="['/Chat/private-chat']">Raye T. Sipes</a>
+                                  </div>
+                              </div>
+                              <div><span class="f-w-500 f-light f-12">Hello Dear!! This Theme Is Very beautiful</span></div>
+                          </div><span class="f-light f-w-500 f-12">48 min</span>
+                      </div>
+                  </li>
+                  <li class="notification d-flex w-100 justify-content-between align-items-center">
+                      <div class="d-flex w-100 notification-data justify-content-center align-items-center gap-2">
+                          <div class="user-alerts flex-shrink-0">
+                              <img class="rounded-circle img-fluid img-40" src="assets/images/dashboard/user/6.jpg" alt="user" />
+                          </div>
+                          <div class="flex-grow-1">
+                              <div class="common-space user-id w-100">
+                                  <div class="common-space w-100">
+                                      <a class="f-w-500 f-12" [routerLink]="['/Chat/private-chat']">Henry S. Miller</a>
+                                  </div>
+                              </div>
+                              <div><span class="f-w-500 f-light f-12">You’re older today than yesterday, happy birthday!</span>
+                              </div>
+                          </div><span class="f-light f-w-500 f-12">3 min</span>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+          </div>
+          <div class="tab-pane fade" id="pills-blog" [ngClass]="{'show active': openTab == 'Cart'}">
+            <div class="cart-dropdown mt-4">
+              <ul>
+                  <li class="pr-0 pl-0 pb-3">
+                      <div class="media">
+                          <img class="img-fluid b-r-5 me-3 img-60" src="assets/images/other-images/cart-img.jpg" alt="">
+                          <div class="media-body">
+                              <a class="f-light f-w-500" [routerLink]="['/ecommerce/products']">Furniture Chair for Home</a>
+                              <div class="qty-box">
+                                  <div class="input-group">
+                                      <span class="input-group-prepend">
+                                          <button class="btn quantity-left-minus" type="button" data-type="minus" data-field="">-</button>
+                                      </span>
+                                      <input class="form-control input-number" type="text" name="quantity" value="1">
+                                      <span class="input-group-prepend">
+                                          <button class="btn quantity-right-plus" type="button" data-type="plus" data-field="">+</button>
+                                      </span>
+                                  </div>
+                                </div>
+                              <h6 class="font-primary">$500</h6>
+                          </div>
+                        <div class="close-circle"><a class="bg-danger" href="javascript:void(0)"><i data-feather="x"></i></a></div>
+                      </div>
+                  </li>
+                  <li class="pr-0 pl-0 pb-3 pt-3">
+                      <div class="media">
+                          <img class="img-fluid b-r-5 me-3 img-60" src="assets/images/other-images/receiver-img.jpg" alt="">
+                          <div class="media-body">
+                              <a class="f-light f-w-500" [routerLink]="['/ecommerce/products']">Men Cotton Blend Blue T-Shirt</a>
+                              <div class="qty-box">
+                                  <div class="input-group"> 
+                                      <span class="input-group-prepend">
+                                          <button class="btn quantity-left-minus" type="button" data-type="minus"data-field="">-</button>
+                                      </span>
+                                      <input class="form-control input-number" type="text" name="quantity" value="1">
+                                      <span class="input-group-prepend">
+                                          <button class="btn quantity-right-plus" type="button" data-type="plus" data-field="">+</button>
+                                      </span>
+                                  </div>
+                              </div>
+                              <h6 class="font-primary">$695.00</h6>
+                          </div>
+                          <div class="close-circle"><a class="bg-danger" href="javascript:void(0)"><i data-feather="x"></i></a></div>
+                      </div>
+                  </li>
+                  <li class="mb-3 total">
+                      <a  [routerLink]="['/ecommerce/checkout']">
+                          <h6 class="mb-0"> Order Total :<span class="f-right">$1195.00 </span></h6>
+                      </a>
+                  </li>
+              </ul>
+          </div>          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="text-center">
+        <a class="f-w-700" [routerLink]="['/Chat/private-chat']">
+          <button class="btn btn-primary" type="button" title="btn btn-primary">Check all</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

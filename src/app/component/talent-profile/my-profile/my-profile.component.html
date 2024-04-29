@@ -1,0 +1,1045 @@
+<div class="container-fluid">
+    <div class="edit-profile">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title mb-0">My Profile</h4>
+                      <div class="card-options">
+                        <a class="card-options-collapse" href="javascript:void(0)">
+                          <i class="fe fe-chevron-up"></i>
+                        </a>
+                         <a class="card-options-remove" href="javascript:void(0)">
+                          <i class="fe fe-x"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      
+                        <div class="row mb-2">
+                          <div class="profile-title">
+                            <div class="media">
+
+                                <!-- <img *ngIf="this.talentModel?.ProfilePicPath" [src]="DisplayImage_ProfilePicPath"
+                                alt="Profile Picture" />
+
+                            <img *ngIf="!this.talentModel?.ProfilePicPath"
+                                src="assets/media/svg/avatars/blank.svg" alt="Default Profile Picture" /> -->
+
+                              <img class="img-70 rounded-circle" alt="" src="assets/images/user/7.jpg">
+                              <div class="media-body">
+                                <h5 class="mb-1">{{this.talentModel.FirstName+"
+                                    " + this.talentModel.LastName }}</h5>
+                                <p>{{this._credentials?.UserTypeCode}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <label class="col-lg-4 col-form-label required fw-bold fs-6">Personal  Details</label>
+                        <!-- <a class="nav-link text-active-primary ms-0 me-10 py-5 cursor-pointer"
+                        href="javascript:void(0)"
+                        (click)="TabName = 'Settings'">BankDetails</a> -->
+                        <div class="mb-3">
+                            <label class="form-label">Contact :  </label>
+                            {{this.talentModel.PhoneNumber}}
+                          </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email-Address  :  </label>
+                            {{this.talentModel.Email }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender :  </label>
+                            {{ this.talentModel.Gender ? 'Female' : 'Male' }}
+                         </div>
+                         <div class="mb-3">
+                            <label class="form-label">Date of Birth :  </label>
+                            {{this.talentModel.DateOfBirth |date: 'dd/MM/yyyy' }}                 
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Years Of Experience  :  </label>
+                            {{this.talentModel.TotalExperienceYear +"."+this.talentModel.TotalExperienceMonth}} Years
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Number of Project Completed  :  </label>
+                            {{this.talentModel.ProjectCompleted}}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address  :  </label>
+                            {{
+                                this.talentModel.Address1 + ", "+
+                                this.talentModel.Address2 + ", "+
+                                this.talentModel.CityName + ", "+
+                                this.talentModel.StateName + ", "+
+                                this.talentModel.CountryName + ", "+
+                                this.talentModel.PostalCode
+                         }} </div>
+                        <div class="mb-3">
+                          <label class="form-label">Github</label>
+                          {{talentModel.GithubURL ?talentModel.GithubURL  :'' }}     
+                         </div>
+                        <div class="mb-3">
+                          <label class="form-label">LinkedIn</label>
+                          {{talentModel.LinkedInURL}}</div>
+                          <div *ngIf="this.talentModel.IFSCCode !== null">
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Bank  Details</label>
+
+                            <div class="mb-3">
+                                <label class="form-label">Account Number</label>
+                                {{talentModel.AccountNumber}}</div>
+                                
+                                <div class="mb-3">
+                                  <label class="form-label">IFSC Code </label>
+                                  {{talentModel.IFSCCode}}</div>  
+                                  <div class="mb-3">
+                                      <label class="form-label">Account Type</label>
+                                      {{talentModel.AccountType === 0 ? ' ' : talentModel.AccountType }}</div>
+                                        <div class="mb-3">
+                                          <label class="form-label">Payment Option </label>
+                                          {{ talentModel.PaymentOption === 0 ? ' ' : talentModel.PaymentOption }}</div>
+                                                       
+                                          <div class="mb-3">
+                                              <label class="form-label">Beneficiary Name </label>
+                                              {{talentModel.BeneficiaryName}}
+                                          </div>             
+                                     <div class="mb-3">
+                                      <label class="form-label">Branch Name </label>
+                                      {{talentModel.BranchName}}
+                                    </div>
+                          </div>
+                     </div>
+                  </div>
+              </div>
+              
+            <div class="col-xl-8">
+                <form class="card" #registerForm="ngForm"
+                (ngSubmit)="registerForm.form.valid && submit(registerForm.form)" novalidate="novalidate">
+                    <div class="card-header">
+                      <h4 class="card-title mb-0">Edit Profile</h4>
+                     
+                    </div>
+                    <div class="card-body" *ngIf="displayDocs==false">
+                      <div class="row">
+                        <!-- <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">Profile Pic</label>
+                            <div class="col-lg-8">
+                                <div class="image-input image-input-outline" data-kt-image-input="true">
+                                    <img *ngIf="this.talentModel?.ProfilePicPath"
+                                        [src]="DisplayImage_ProfilePicPath" alt="Profile Picture"
+                                        class="image-input-wrapper w-100px h-100px" />
+                                    <img *ngIf="!this.talentModel?.ProfilePicPath"
+                                        src="assets/media/svg/avatars/blank.svg" alt="Default Profile Picture"
+                                        class="image-input-wrapper w-100px h-100px" />
+                                    <label
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                        title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg"
+                                            (change)="onSelectProfilePicFile($event)" />
+                                        <input type="hidden" name="avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow cursor-pointer"
+                                      data-kt-image-input-action="remove" data-bs-toggle="tooltip"  title="Remove avatar" (click)="onRemoveCompanyLogoFile()">
+                                        <i class="bi bi-x fs-2" style="cursor: pointer;"></i> </span>
+                                </div>
+                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                            </div>
+                        </div> -->
+
+
+                        <div class="col-4">
+                          <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text"
+                            class="form-control form-control-solid"
+                            name="FirstName" value="" [(ngModel)]="talentModel.FirstName"
+                            placeholder="First Name" #FirstName="ngModel" required maxlength="15"
+                            pattern="^[a-zA-Z]+$" />
+                        <div class=""
+                          *ngIf="(FirstName.touched || registerForm.submitted) && FirstName.errors?.['required'] ">
+                            <small class="text-error">First Name is required .</small> 
+                        </div>
+                                 <div *ngIf="(FirstName.touched || registerForm.submitted) && (FirstName.errors?.['maxlength']) ">
+                               <small class="text-error" *ngIf="FirstName.errors?.['maxlength']">Maximum 15 characters allowed for First Name.</small>
+                                </div>
+                                <div  *ngIf="(FirstName.touched || registerForm.submitted) &&  (FirstName.errors?.['pattern'])" >
+                            <small class="text-error" *ngIf="FirstName.errors?.['pattern']">Only letters are allowed for First Name.</small>
+                        </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control form-control-solid"
+                            name="LastName" value="" [(ngModel)]="talentModel.LastName"
+                            placeholder="Last Name" #LastName="ngModel" required maxlength="15"
+                            pattern="^[a-zA-Z]+$" />
+                        <div  *ngIf="(LastName.touched || registerForm.submitted) && (LastName.errors?.['required'] || LastName.errors?.['maxlength'] || LastName.errors?.['pattern'])">
+                            <small class="text-error">Last Name is required .</small>
+                            </div>
+                            <div  *ngIf="(LastName.touched || registerForm.submitted) && (LastName.errors?.['required'] || LastName.errors?.['maxlength'] || LastName.errors?.['pattern'])">
+                            <small class="text-error" *ngIf="LastName.errors?.['maxlength']">Maximum 15 characters allowed for Last Name</small></div>
+                            <div  *ngIf="(LastName.touched || registerForm.submitted) && (LastName.errors?.['required'] || LastName.errors?.['maxlength'] || LastName.errors?.['pattern'])">
+                            <small class="text-error" *ngIf="LastName.errors?.['pattern']">Only letters  are allowed for Last Name</small>
+                        </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">Phone Number </label>
+                              <input type="text" class="form-control form-control-solid" name="phone"
+                              placeholder="Phone Number" value="" [(ngModel)]="talentModel.PhoneNumber"
+                              #PhoneNumber="ngModel" pattern="^[0-9]{10}$" maxlength="10" required />
+                          <div class=""
+                              *ngIf="(PhoneNumber.touched || registerForm.submitted) && PhoneNumber.errors?.['required']">
+                              <small class="text-error">Phone Number is required .</small>
+                          </div>
+                          <div class=""
+                              *ngIf="(PhoneNumber.touched || registerForm.submitted) && PhoneNumber.errors?.['pattern']">
+                              <small class="text-error">Please enter a 10-digit phone number .</small>
+                          </div></div>
+                          </div>
+                          <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">Email </label>
+                              <input type="email"class="form-control form-control-solid"  name="Email"
+                              value="" [(ngModel)]="talentModel.Email" #Contact="ngModel" disabled />
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">Date of Birth</label>
+                              <input type="date" [max]="maxDate"
+                              class="form-control form-control-solid" id="DateOfBirth"
+                              name="DateOfBirth" [ngModel]="talentModel.DateOfBirth | date:'yyyy-MM-dd'"
+                              (ngModelChange)="talentModel.DateOfBirth = $event"
+                              [value]="talentModel.DateOfBirth | date:'yyyy-MM-dd'" #DateOfBirth="ngModel"
+                              required>
+                          <div class=""
+                              *ngIf="(DateOfBirth.touched || registerForm.submitted) && DateOfBirth.errors?.['required']">
+                              <small class="text-error">Birthdate is required .</small>
+                          </div></div>
+                          </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">Gender</label>
+                              <div class="custom-control custom-radio">
+                                  <input id="Gender" type="radio" class="custom-control-input" #Gender="ngModel"
+                                      checked [value]="false" name="gender" ngModel required
+                                      [(ngModel)]="talentModel.Gender" style="padding-right: 5px;">
+                                  <label class="col col-form-label fw-bold fs-6" style="padding-right: 7px;" for="Gender">Male</label>
+                                  <input id="Gender" type="radio" class="custom-control-input" #Gender="ngModel"
+                                      [value]="true" name="gender" ngModel required
+                                      [(ngModel)]="talentModel.Gender">
+                                  <label class="col col-form-label fw-bold fs-6" for="Gender">Female</label>
+                                  <div class="invalid-feedback" *ngIf=" Gender.touched && registerForm.invalid">
+                                      <p>Please select either value .</p>
+                                  </div>  
+                              </div>    
+                             </div>
+                          </div>
+                        <div class="col-4">
+                          <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <select data-control="select2" data-hide-search="true"
+                            data-placeholder="Select..." name="StartYear"
+                            [(ngModel)]=" this.talentModel.CountryId " #StartYear="ngModel" required (ngModelChange)="onChanageCountry($event)"
+                            class="form-select form-select-solid">
+                            <option value="0" disabled>Select Country</option>
+                            <option [value]="item.CountryId" *ngFor="let item of countryList">
+                                {{ item.CountryName }}
+                            </option>
+                        </select>         
+                          </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">State</label>
+                              <select data-control="select2" data-hide-search="true"
+                              data-placeholder="Select..." name="StartYear"
+                              [(ngModel)]=" this.talentModel.StateId" #StartYear="ngModel" required (ngModelChange)="onChnageState($event)"
+                              class="form-select form-select-solid">
+                              <option value="0" disabled>Select State</option>
+                              <option [value]="year.StateId" *ngFor="let year of stateList">
+                                  {{ year.StateName }}
+                              </option>
+                          </select> 
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">City</label>
+                              <select data-control="select2" data-hide-search="true"
+                              data-placeholder="Select..." name="StartYear"
+                              [(ngModel)]="this.talentModel.CityId" #StartYear="ngModel" required
+                              class="form-select form-select-solid">
+                              <option value="0" disabled>Select City</option>
+                              <option [value]="year.CityId" *ngFor="let year of cityList">
+                                  {{ year.CityName }}
+                              </option>
+                          </select>                  
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="mb-3">
+                              <label class="form-label">Address 1 </label>
+                              <input type="text" class="form-control form-control-solid" name="Address1"
+                              [(ngModel)]="this.talentModel.Address1" #Address1="ngModel" required />
+                              <div class=""
+                              *ngIf="(Address1.touched || registerForm.submitted) && Address1.errors?.['required']">
+                              <small class="text-error">Address 1 is required .</small>
+                          </div>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="mb-3">
+                              <label class="form-label">Address 2</label>
+                              <input type="text" name="Address2"  class="form-control form-control-solid"
+                              placeholder="Enter your address line 2" value=""
+                              [(ngModel)]="this.talentModel.Address2" #Address2="ngModel" >
+                              <!-- <div class=""
+                              *ngIf="(Address2.touched || registerForm.submitted) && Address2.errors?.['required']">
+                              <small class="text-error">Address Line 2 is required</small>
+                          </div> -->
+                          </div>
+                          </div>
+
+                        <div class="col-4">
+                          <div class="mb-3">
+                            <label class="form-label">Tech Skills</label>                          
+                           <ng-multiselect-dropdown [placeholder]="'Choose Technologies'"
+                                            [settings]="ddSettings_Skill" [data]="skillList" [(ngModel)]="selectedSkill"
+                                            [ngModelOptions]="{ standalone: true }" #TechSkill="ngModel" required>
+                                        </ng-multiselect-dropdown>
+                                        <div class=""
+                                            *ngIf="(TechSkill.touched || registerForm.submitted) && TechSkill.errors?.['required']">
+                                            <small class="text-error">Expertise is required</small>
+                                        </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                              <label class="form-label">Experties</label>
+                              <ng-multiselect-dropdown [placeholder]="'Choose Technologies'"
+                                            [settings]="ddSettings_Skill" [data]="skillList"
+                                            [(ngModel)]="selectedExpertise" [ngModelOptions]="{ standalone: true }"
+                                            #Expertise="ngModel" required>
+                                        </ng-multiselect-dropdown>
+                                        <div class=""
+                                            *ngIf="(Expertise.touched || registerForm.submitted) && Expertise.errors?.['required']">
+                                            <small class="text-error">Expertise is required .</small>
+                                        </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <label class="form-label">Number of project completed</label>
+                                    <input type="text" class="form-control form-control-solid" name="ProjectCompleted"
+                                      placeholder="Number of Project Completed" value=""
+                                      [(ngModel)]="this.talentModel.ProjectCompleted" #ProjectCompleted="ngModel"
+                                      required />
+                                  <div class=""
+                                      *ngIf="(ProjectCompleted.touched || registerForm.submitted) && ProjectCompleted.errors?.['required']">
+                                      <small class="text-error">Number of Project is required .</small>
+                                  </div>
+                                 </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="mb-3">
+                              <label class="form-label"> Years Of Experience
+                            </label>
+                                <select data-control="select2" data-hide-search="true"
+                                            data-placeholder="Select..." name="TotalExperienceYear"
+                                            [(ngModel)]="this.talentModel.TotalExperienceYear"
+                                            #TotalExperienceYear="ngModel" required
+                                            class="form-select form-select-solid" required>
+                                            <option value="0" disabled>Select Year</option>
+                                            <option [value]="year.item_id" *ngFor="let year of totalExperienceYearList">
+                                                {{ year.item_text }}
+                                            </option>
+                                        </select>
+
+                                        <div class=""
+                                            *ngIf="(TotalExperienceYear.touched || registerForm.submitted) && TotalExperienceYear.errors?.['required']">
+                                            <small class="text-error">Year is required .</small>
+                           </div>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="mb-3">
+                              <label class="form-label"> Month </label>
+                          <select data-control="select2" data-hide-search="true"
+                          data-placeholder="Select..." name="TotalExperienceMonth"
+                          [(ngModel)]="this.talentModel.TotalExperienceMonth"
+                          #TotalExperienceMonth="ngModel" 
+                          class="form-select form-select-solid" >
+                          <option value="0" disabled>Select Year</option>
+                          <option [value]="year.item_id" *ngFor="let year of totalExperienceYearList">
+                              {{ year.item_text }}
+                          </option>
+                      </select>
+                      </div>
+                      </div>
+                    
+                      <div class="row mb-6">
+                         <label class="col-lg-4 col-form-label required fw-bold fs-6 mt-3">Education Details</label>
+                         <!--end::Label-->
+                         <!--begin::Col-->
+                         <div class="col-lg-8">
+                             <!--begin::Row-->
+                             <div class="row">
+                                 <!--begin::Col-->
+                                 <div class="col-lg-6 fv-row">
+                                     <label class="form-label mt-3">
+                                         <span class="required">Degree/Title</span>
+                                     </label>
+                                     <!--end::Label-->
+                                     <!--begin::Input-->
+                                     <input type="text" class="form-control form-control-solid" name="DegreeTitle"
+                                         placeholder="Enter Degree Name" value=""
+                                         [(ngModel)]="this.talentModel.DegreeTitle" #DegreeTitle="ngModel"
+                                         required />
+                                     <div *ngIf="(DegreeTitle.touched || registerForm.submitted) && DegreeTitle.errors?.['required']">
+                                         <small class="text-error">Degree/Title is required .</small>
+                                     </div>
+                                     <!--end::Input-->
+                                 </div>
+                                 <!--end::Col-->
+                                 <!--begin::Col-->
+                                 <div class="col-lg-6 fv-row">
+                                     <label class="form-label mt-3">
+                                         <span class="required">University Name</span>
+                                     </label>
+                                     <!--end::Label-->
+                                     <!--begin::Input-->
+                                     <input type="text" class="form-control form-control-solid" name="UniversityName"
+                                         placeholder="Enter University Name" value=""
+                                         [(ngModel)]="this.talentModel.UniversityName" #UniversityName="ngModel"
+                                         required />
+                                     <div class=""
+                                         *ngIf="(UniversityName.touched || registerForm.submitted) && UniversityName.errors?.['required']">
+                                         <small class="text-error">University Name is required .</small>
+                                     </div>
+                                     <!--end::Input-->
+                                 </div>
+                                 <!--end::Col-->
+                             </div>
+                             <!--end::Row-->
+                         </div>
+                       </div>
+                         <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label  fw-bold fs-6"></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Row-->
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="form-label mt-3">
+                                            <span class="required">Start Year</span>
+                                        </label>
+                                        <select data-control="select2" data-hide-search="true"
+                                            data-placeholder="Select..." name="StartYear"
+                                            [(ngModel)]="this.talentModel.StartYear" #StartYear="ngModel" required
+                                            class="form-select form-select-solid">
+                                            <option value="0" disabled>Select Start Year</option>
+                                            <option [value]="year.item_id" *ngFor="let year of totalStartEndYearList">
+                                                {{ year.item_text }}
+                                            </option>
+                                        </select>
+                                        <div class=""
+                                            *ngIf="(StartYear.touched || registerForm.submitted) && StartYear.errors?.['required']">
+                                            <small class="text-error">Start Year is required .</small>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="form-label mt-3">
+                                            <span class="required">End Year</span>
+                                        </label>
+                                        <select data-control="select2" data-hide-search="true"
+                                            data-placeholder="Select..." name="EndYear"
+                                            [(ngModel)]="this.talentModel.EndYear" #EndYear="ngModel" required
+                                            class="form-select form-select-solid" min>
+                                            <option value="0" disabled>Select End Year</option>
+                                            <option [value]="year.item_id" *ngFor="let year of totalStartEndYearList">
+                                                {{ year.item_text }}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="(EndYear.touched || registerForm.submitted) && EndYear.errors?.['required']">
+                                            <small class="text-error">End Year is required .</small>
+                                        </div>
+                                        <div  *ngIf="(EndYear.touched || registerForm.submitted) && EndYear.errors?.['endYearLessThanStartYear']">
+                                            <small class="text-error">End Year should be less than Start Year.</small>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6 mt-3">CTC Details</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Row-->
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="form-label mt-3">
+                                            <span>Expected CTC In LPA </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Select-->
+                                        <input type="number" class="form-control form-control-solid"
+                                            name="ExpectedPayout" placeholder="Enter Amount" value=""
+                                            [(ngModel)]="this.talentModel.ExpectedPayout" #ExpectedPayout="ngModel"
+                                            required />
+                                        <div class=""
+                                            *ngIf="(ExpectedPayout.touched || registerForm.submitted) && ExpectedPayout.errors?.['required']">
+                                            <small class="text-error">Expected CTC is required .</small>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="form-label mt-3">
+                                            <span>Current CTC In LPA</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Select-->
+                                        <input type="number" class="form-control form-control-solid"
+                                            name="CurrentPayout" placeholder="Enter Amount" value=""
+                                            [(ngModel)]="this.talentModel.CurrentPayout" #CurrentPayout="ngModel"
+                                            required />
+                                        <div class=""
+                                            *ngIf="(CurrentPayout.touched || registerForm.submitted) && CurrentPayout.errors?.['required']">
+                                            <small class="text-error">Current CTC is required .</small>
+                                        </div>
+                                        <!--end::Select-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body"  *ngIf="displayDocs==true">
+                         
+                        <div class="dropzoness" id="kt_ecommerce_add_product_media">
+                            <div class="dz-message needsclick" style="padding: 10px;">
+                            
+                                <h2 class="fw-bolder fs-6 text-gray-800">{{this.talentModel.FirstName+" " +
+                                    this.talentModel.LastName }} Cv</h2>
+                                <div class="col-12 d-flex"
+                                    *ngIf="talentModel.CVURL !='' && talentModel.CVURL != null ; else CVuploaded">
+                                    <a href="{{(serverFilePath + talentModel.CVURL)}}"
+                                        target="_blank">Preview /
+                                        Download CV</a>
+                                    <p>{{talentModel.TalentCV}} </p>
+                                    <div (click)="Removecv()" style="padding-left:15px"> <i class="fa fa-window-close"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+    
+                                <ng-template #CVuploaded>
+                                    <div class="col-12">
+                                        <ngx-dropzone (change)="onSelect($event)"
+                                            class="removedropzone mb-1">
+                                            <ngx-dropzone-label>
+                                                <i
+                                                    class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files
+                                                    here or click to upload Your CV.</h3>
+                                                <span class="fs-7 fw-bold text-gray-400">max size 2
+                                                    mb.</span> <br>
+                                                    <span class="fs-7 fw-bold text-gray-400">Please Select Only
+                                                        Docx
+                                                        File</span>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-preview
+                                                *ngFor="let f of this.talentModel.TalentCV"
+                                                [removable]="true" (removed)="onRemove(f)">
+                                                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                    </div>
+                                </ng-template>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+           
+                        <div class="dropzoness" id="kt_ecommerce_add_product_media">
+                            <!--begin::Message-->
+                            <div class="dz-message needsclick" style="padding: 10px;">
+                                <!--begin::Icon-->
+                                <!-- <h2 >Aadhar Card Upload</h2> -->
+                                <h2 class="fw-bolder fs-6 text-gray-800">{{ talentModel.AddressProof != null ? 'Aadhar Card' : 'Upload Aadhar Card'}}</h2>
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+                                <div class="col-12 d-flex"
+                                    *ngIf="talentModel.AddressProof !='' && talentModel.AddressProof != null;else AdharCarduploaded">
+                                    <a href="{{(serverFilePath + talentModel.AddressProof)}}"
+                                        target="_blank">Preview / Download AadharCardUpload</a>
+                                    <!-- <p>{{talentModel.AddressProof}} </p> -->
+                                    <div (click)="RemoveAddress()" style="padding-left: 15px;"> <i class="fa fa-window-close"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <ng-template #AdharCarduploaded>
+                                    <div class="col-12">
+                                        <ngx-dropzone (change)="onSelectAdharCard($event)"
+                                            class="removedropzone mb-1">
+                                            <ngx-dropzone-label>
+                                                <i
+                                                    class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files
+                                                    here or click to upload.</h3>
+                                                <span class="fs-7 fw-bold text-gray-400">max size 2
+                                                    mb.</span> <br>
+
+                                                    <span class="fs-7 fw-bold text-gray-400">Please Select Only
+                                                        Docx
+                                                        File</span>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-preview
+                                                *ngFor="let f of talentModel.TalentAddressProof"
+                                                [removable]="true" (removed)="onRemoveAdharCard(f)">
+                                                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                        <div *ngIf="fileEmptyError_aadhar" class="text-error">File is
+                                            empty. Please select a valid file.</div>
+                                    </div>
+                                </ng-template>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+                        <!--end::Dropzone-->
+    
+                        <!--begin::Dropzone-->
+                        <div class="dropzoness" id="kt_ecommerce_add_product_media">
+                            <!--begin::Message-->
+                            <div class="dz-message needsclick" style="padding: 10px;">
+                                <!--begin::Icon-->
+                                <!-- <h2>ID Proof Upload</h2> -->
+                                <h2 class="fw-bolder fs-6 text-gray-800">{{ talentModel.PhotoIdentity != null ? 'ID Proof' : 'Upload ID Proof' }}
+                                </h2>
+    
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+    
+                                <div class="col-12 d-flex"
+                                    *ngIf="talentModel.PhotoIdentity !='' && talentModel.PhotoIdentity != null ;else IDProofloaded">
+                                    <a href="{{(serverFilePath + talentModel.PhotoIdentity)}}"
+                                        target="_blank">Preview / Download IDProofUpload</a>
+                                    <!-- <p>{{talentModel.PhotoIdentity}} </p> -->
+                                    <div (click)="RemoveIDProof()" style="padding-left: 15px;"> <i class="fa fa-window-close"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+    
+                                <ng-template #IDProofloaded>
+                                    <div class="col-12">
+                                        <ngx-dropzone (change)="onSelectIdProof($event)"
+                                            class="removedropzone mb-1">
+                                            <ngx-dropzone-label>
+                                                <i
+                                                    class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files
+                                                    here or
+                                                    click to upload.</h3>
+                                                <span class="fs-7 fw-bold text-gray-400">max size 2
+                                                    mb.</span> <br>
+
+                                                    <span class="fs-7 fw-bold text-gray-400">Please Select Only
+                                                        Docx
+                                                        File</span>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-preview
+                                                *ngFor="let f of talentModel.TalentPhotoIdentity"
+                                                [removable]="true" (removed)="onRemoveIdProof(f)">
+                                                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                        <div *ngIf="fileEmptyError_IDproof" class="text-error">File is
+                                            empty. Please select a valid file.</div>
+    
+                                    </div>
+                                </ng-template>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+                        <!--end::Dropzone-->
+    
+                        <!--begin::Dropzone-->
+                        <div class="dropzoness" id="kt_ecommerce_add_product_media">
+                            <!--begin::Message-->
+                            <div class="dz-message needsclick" style="padding: 10px;">
+                                <!--begin::Icon-->
+                                <!-- <h2>Pan Card Upload</h2> -->
+                                <h2 class="fw-bolder fs-6 text-gray-800">{{ talentModel.PanCard != null ? 'Pan Card' : 'Upload Pan Card' }}</h2>
+    
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+    
+                                <div class="col-12 d-flex"
+                                    *ngIf="talentModel.PanCard !='' && talentModel.PanCard != null;else PanCardUpload">
+                                    <a href="{{(serverFilePath + talentModel.PanCard)}}"
+                                        target="_blank">Preview
+                                        / Download PanCardUpload</a>
+                                    <!-- <p>{{talentModel.PanCard}} </p> -->
+                                    <div (click)="RemovePanCard()" style="padding-left: 15px;"> <i class="fa fa-window-close"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+    
+                                <ng-template #PanCardUpload>
+                             
+                                    <div class="col-12">
+                                        <ngx-dropzone (change)="onSelectPanCard($event)"
+                                            class="removedropzone mb-1">
+                                            <ngx-dropzone-label>
+                                                <i
+                                                    class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files
+                                                    here or
+                                                    click to upload.</h3>
+                                                <span class="fs-7 fw-bold text-gray-400">max size 2
+                                                    mb.</span>
+                                                    <br>
+
+                                                    <span class="fs-7 fw-bold text-gray-400">Please Select Only
+                                                        Docx
+                                                        File</span>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-preview
+                                                *ngFor="let f of talentModel.TalentPanCard"
+                                                [removable]="true" (removed)="onRemovePancard(f)">
+                                                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                        <div *ngIf="fileEmptyError_pan" class="text-error">File is empty.
+                                            Please select a valid file.</div>
+    
+                                    </div>
+                                </ng-template>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+                        <!--end::Dropzone-->
+                 
+                          <div class="row">
+              
+                            <!--begin::Dropzone-->
+                            <div class="dropzones" id="kt_ecommerce_add_product_media">
+                                <div class="dz-message needsclick">
+                                    <div class="col-12"
+                                        *ngIf="talentModel.Achievement && talentModel.Achievement.length > 0  && talentModel.Achievement !== undefined">
+                                        <table style="border-collapse: collapse; width: 100%;">
+                                            <tr>
+                                                <th
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    Name</th>
+                                                <th
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    Download</th>
+                                                <th
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    Action</th>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    <div *ngFor="let file of talentModel.DocumentNames">
+                                                        {{ file }}
+    
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    <div *ngFor="let file of talentModel.DocumentPaths">
+                                                        <a href="{{ (serverFilePath + file) }}"
+                                                            target="_blank">Download</a>
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                                                    <div *ngFor="let file of talentModel.DocumentPaths">
+                                                        <a href="javascript:void(0)"
+                                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                                                            (click)="RemoveDocument(file)">
+                                                            <span class="svg-icon svg-icon-3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    width="24" height="24"
+                                                                    viewBox="0 0 24 24" fill="none">
+                                                                    <path
+                                                                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
+                                                                        fill="currentColor"></path>
+                                                                    <path opacity="0.5"
+                                                                        d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
+                                                                        fill="currentColor"></path>
+                                                                    <path opacity="0.5"
+                                                                        d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
+                                                                        fill="currentColor"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+    
+                                    <div class="col-12" style="margin-top: 10px;">
+                                        <ngx-dropzone (change)="onSelectt($event)"
+                                            class="removedropzonee mb-1">
+                                            <ngx-dropzone-label>
+                                                <i
+                                                    class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files
+                                                    here or click to upload.</h3>
+                                                <span class="fs-7 fw-bold text-gray-400">max size 2
+                                                    mb.</span><br />
+                                                <span class="fs-7 fw-bold text-gray-400">Please Select Only
+                                                    Docx
+                                                    File</span>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-preview
+                                                *ngFor="let f of talentModel._Achievements"
+                                                [removable]="true" (removed)="onRemovee(f)">
+                                                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                            <button class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                                                *ngIf="talentModel._Achievements && talentModel._Achievements.length !== 0">+</button>
+    
+                                        </ngx-dropzone>
+                                    </div>
+    
+                                </div>
+                            </div>
+                         </div>
+                  
+            </div>
+            <div class="card-footer text-end" *ngIf="displayDocs==false">
+                <button class="btn btn-light" style="margin-right: 10px;" type="cancel"  routerLink="/dashboard/default">cancel</button>
+
+                <button class="btn btn-primary" type="submit" (click)="nextTab()">Next</button>
+              </div>
+                    <div class="card-footer text-end" *ngIf="displayDocs==true">
+                      <button class="btn btn-light" style="margin-right: 10px;" (click)="nextTab()">Previous</button>
+
+                      <button class="btn btn-primary" type="submit" (click)="submit(registerForm.form)" [disabled]="registerForm.form.invalid">Update Profile</button>
+                    </div>
+                  </form>
+   </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <form  #bankForm="ngForm"
+                (ngSubmit)="bankForm.form.valid && Banksubmit(bankForm.form)" novalidate class="card">
+                <!--begin::Card body-->
+                <div class="card-body border-top p-9">
+
+                    <div class="card-header">
+                        <div>
+                            <h4 class="card-title mb-0">Bank Details</h4>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+
+                        <div class="col-lg-4">
+                            <label class="form-label  mt-3">
+                                <span class="required">Bank Name</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" name="BankName"
+                                placeholder="Bank Name" value="" [(ngModel)]="talentModel.BankName"
+                                #BankName="ngModel" required maxlength="25" />
+                            <div class=""
+                                *ngIf="(BankName.touched || bankForm.submitted) && BankName.errors?.['required']  || (BankName.errors?.['maxlength'])">
+                                <small class="text-error">Bank Name is required</small>
+                                <small class="text-error" *ngIf="BankName.errors?.['maxlength']">Maximum
+                                    25 characters allowed for Bank Name</small>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span class="required">Branch Name</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" name="BranchName"
+                                    placeholder="Branch Name" value="" [(ngModel)]="talentModel.BranchName"
+                                    #BranchName="ngModel" required maxlength="25" />
+                                <div class=""
+                                    *ngIf="(BranchName.touched || bankForm.submitted) && BranchName.errors?.['required']  || (BranchName.errors?.['maxlength']) ">
+                                    <small class="text-error">Branch Name is required</small>
+                                    <small class="text-error" *ngIf="BranchName.errors?.['maxlength']">Maximum
+                                        25 characters allowed for Branch Name</small>
+                                    <small class="text-error" *ngIf="BranchName.errors?.['pattern']">Only
+                                        letters are allowed for Branch Name</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span>Beneficiary Name</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" name="BeneficiaryName"
+                                    placeholder="Beneficiary Name" value=""
+                                    [(ngModel)]="talentModel.BeneficiaryName" #BeneficiaryName="ngModel" required />
+                                <!--end::Input-->
+                                <div class=""
+                                    *ngIf="(BeneficiaryName.touched || bankForm.submitted) && BeneficiaryName.errors?.['required']">
+                                    <small class="text-error">Beneficiary Name is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span class="required">Account Number</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-solid" name="A/C_No"
+                                    placeholder="Account Number" value="" [(ngModel)]="talentModel.AccountNumber"
+                                    #AccountNumber="ngModel" required maxlength="25" pattern="^[0-9]*$" />
+                                <!--end::Input-->
+                                <div class=""
+                                    *ngIf="(AccountNumber.touched || bankForm.submitted) && AccountNumber.errors?.['required']  || (AccountNumber.errors?.['maxlength']) || (AccountNumber.errors?.['pattern'])">
+                                    <small class="text-error">Account Number is required</small>
+                                    <small class="text-error" *ngIf="AccountNumber.errors?.['maxlength']">Maximum
+                                        25 characters allowed for Account Number</small>
+                                    <small class="text-error" *ngIf="AccountNumber.errors?.['pattern']">Only
+                                        numbers are allowed for Account Number </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span class="required">IFSC Code</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" name="IFSCCode"
+                                    placeholder="IFSC Code" value="" [(ngModel)]="talentModel.IFSCCode"
+                                    #IFSCCode="ngModel" required />
+                                <!--end::Input-->
+                                <div class=""
+                                    *ngIf="(IFSCCode.touched || bankForm.submitted) && IFSCCode.errors?.['required']">
+                                    <small class="text-error">IFSC Code is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span>SWIFT Code</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" name="SWIFTCode"
+                                    placeholder="SWIFT Code" value="" [(ngModel)]="talentModel.SWIFTCode"
+                                    #SWIFTCode="ngModel" />
+                                <!--end::Input-->
+                                <div class=""
+                                    *ngIf="(SWIFTCode.touched || bankForm.submitted) && SWIFTCode.errors?.['required']">
+                                    <small class="text-error">SWIFT Code is required</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span>Account Type</span>
+                                </label>
+                                
+                                <select data-control="select2" data-hide-search="true" data-placeholder="Select..."
+                                    name="AccountType" [(ngModel)]="this.talentModel.AccountType"
+                                    #AccountType="ngModel" required class="form-select form-select-solid">
+                                    <option value="0" disabled selected>Select Account Type</option>
+                                    <option [value]="account.item_text" *ngFor="let account of AccountTypeList">
+                                        {{ account.item_text }}
+                                    </option>
+                                </select>
+
+
+                                <div class=""
+                                    *ngIf="(AccountType.touched || bankForm.submitted) && AccountType.errors?.['required']">
+                                    <small class="text-error">Account Type is required</small>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label  mt-3">
+                                    <span>Payment Option</span>
+                                </label>
+                     
+                                <select data-control="select2" data-hide-search="true" data-placeholder="Select..."
+                                    name="PaymentOption" [(ngModel)]="this.talentModel.PaymentOption"
+                                    #PaymentOption="ngModel" required class="form-select form-select-solid">
+                                    <option value="0" disabled [selected]>Select Payment Option</option>
+                                    <option [value]="payment.item_text" *ngFor="let payment of PaymentOptionList">
+                                        {{ payment.item_text }}
+                                    </option>
+                                </select>
+
+                                <div class=""
+                                    *ngIf="(PaymentOption.touched || bankForm.submitted) && PaymentOption.errors?.['required']">
+                                    <small class="text-error">Payment Option is required</small>
+                                </div>
+                                <!--end::Select-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Card header-->
+                </div>
+
+                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                  <button class="btn btn-light" style="margin-right: 10px;" type="cancel" routerLink="/dashboard/default">Calcel</button>
+                    <button type="button" class="btn btn-primary" id="kt_account_profile_details_submit"
+                        (click)="Banksubmit(bankForm.form)" [disabled]="bankForm.invalid">
+                        Update Bank Details
+                    </button>
+                </div>
+                <!--end::Actions-->
+            </form>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div>
+    
+</div>
+
+

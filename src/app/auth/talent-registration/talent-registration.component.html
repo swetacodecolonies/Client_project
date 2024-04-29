@@ -1,0 +1,78 @@
+<div class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <div class="login-card login-dark">
+                <div>
+                    <div>
+                        <a class="logo" [routerLink]="['/dashboard/default']">
+                            <img class="img-fluid for-dark" src="assets/images/logo/logo_Icon.png" alt="looginpage"
+                                style="width: 200px;">
+                            <img class="img-fluid for-light" src="assets/images/logo/logo_Icon.png" alt="looginpage"
+                                style="width: 200px;">
+                        </a>
+                    </div>
+                    <div class="login-main">
+      <form class="row g-3 needs-validation custom-input" #RegisterForm="ngForm" (ngSubmit)="RegisterForm.form.valid && submit()" novalidate="" [ngClass]="{'was-validated': validate}">
+        <div class="col-12">
+          <label class="form-label" for="validationCustom01">First Name</label>
+          <input class="form-control" id="validationCustom01" type="text"  [(ngModel)]="talentModal.FirstName" name="FirstName" placeholder="First name" required #FirstName="ngModel">
+          <div  *ngIf="(FirstName.touched || RegisterForm.submitted) && FirstName.errors?.['required'] ">
+            <small class="text-error">First Name is required .</small> 
+        </div> 
+        </div>
+        <div class="col-12">
+            <label class="form-label" for="validationCustom01">Last Name</label>
+            <input class="form-control" id="validationCustom01" type="text" placeholder="Last Name" name="LastName" [(ngModel)]="talentModal.LastName" required #LastName="ngModel">
+            <div  *ngIf="(LastName.touched || RegisterForm.submitted) && LastName.errors?.['required'] ">
+              <small class="text-error">Last Name is required .</small> 
+          </div> 
+          </div> <div class="col-12">
+            <label class="form-label" for="validationCustom01">Contact Number</label>
+            <input class="form-control" id="validationCustom01" type="number"  [(ngModel)]="talentModal.PhoneNumber" name="PhoneNumber" placeholder="Contact Number" required #PhoneNumber="ngModel">
+            <div  *ngIf="(PhoneNumber.touched || RegisterForm.submitted) && PhoneNumber.errors?.['required'] ">
+              <small class="text-error">Contact Number is required .</small> 
+          </div>
+          </div>
+        <div class="col-12">
+            <label class="form-label" for="validationCustom01">Email Address</label>
+            <input class="form-control" id="validationCustom01" type="text"  [(ngModel)]="talentModal.Email" name="Email" placeholder="Email Address" required #Email="ngModel">
+            <div  *ngIf="(Email.touched || RegisterForm.submitted) && Email.errors?.['required'] ">
+              <small class="text-error">Email Address is required .</small> 
+          </div>   
+          </div>
+
+        <div class="col-12">
+          <label class="col-sm-12 col-form-label" for="inputPassword1">Password</label>
+          <input class="form-control" id="inputPassword1" placeholder=" Password"  [(ngModel)]="talentModal.Password" name="Password" type="password" required #Password="ngModel">
+          @if(!show){
+            <div class="show-hide" (click)="showPassword()"><span class="show"> </span></div>
+          }@else{
+            <div class="show-hide" (click)="showPassword()"><span class="Hide"></span></div>
+          }
+          <div  *ngIf="(Password.touched || RegisterForm.submitted) && Password.errors?.['required'] ">
+            <small class="text-error">Password is required .</small> 
+        </div>          </div>
+        
+        <!-- <div class="col-12">
+            <label class="col-sm-12 col-form-label" for="inputPassword1">Confirm Password</label>
+            <input class="form-control" id="inputPassword1" placeholder="Confirm Password"  [(ngModel)]="talentModal.ConfirmPassword" name="ConfirmPassword" type="password" required #FirstName="ngModel">
+            <div class="invalid-feedback">Please enter your valid Confirm Password            </div>
+          </div>
+        -->
+      
+        <div class="col-12">
+          <button class="col-sm-12  btn btn-primary" type="submit" (click)="submit()" [disabled]="RegisterForm.form.invalid">Submit</button>
+        </div>
+        <div class="col-12">
+            <p class="mt-4 mb-0 text-center">Already have account?
+         <a class="ms-2" routerLink="/auth/login">Sign in here </a>
+            </p>
+          </div>
+      </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+

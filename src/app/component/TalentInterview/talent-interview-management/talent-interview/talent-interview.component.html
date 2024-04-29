@@ -1,0 +1,136 @@
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-xxl-12 col-xl-12 box-col-12" *ngIf="interviewlist.length == 0">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="fw-bolder m-5">No interview Found...</h3>
+            </div>
+          </div>
+        </div>
+      <div class="col-xxl-12 col-xl-12 box-col-12">
+          <div class="row" >
+              <div class="card" *ngFor="let item of interviewlist">
+                  <div>
+                      <div class="card-body">
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap">
+                         
+                          <div class="d-flex col-8">
+                          
+                            <div class="d-flex align-items-center mb-1">
+                              <a class="text-gray-400 text-primary fs-6 fw-bolder me-3">
+                                {{item.JobTitle}}</a>
+                            </div>
+                            <div class="d-flex flex-wrap fw-bolder mb-4 fs-6 text-primary-400 px-2">{{ item.ProjectName }}
+                            </div>
+                          </div>
+                        
+                          <div class="d-flex flex-wrap fw-bold fs-7 mb-0 pe-3 mt-4" >
+                            <div *ngIf="item.Cancel_It " class="alert alert-warning alert-dismissible fade show" role="alert">
+                              <strong class="alter-warning">Cancelled!!</strong> {{ "Your interview is canceled." }}
+                            </div>
+                            <div *ngIf="item.Not_Decide" class="alert alert-primary alert-dismissible fade show" role="alert">
+                              <strong class="text-primary">Pending!!</strong> {{ "Your interview decision is pending." }}
+                            </div>
+                            <div *ngIf="item.IsSelected" class="alert alert-success alert-dismissible fade show" role="complementary">
+                              <strong class="text-success">Selected!!</strong> {{ "Congratulations! best wishes for this new job opportunity." }}
+                            </div>
+                            <div *ngIf="item.IsRejected" class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong class="text-danger">Rejected!!</strong> {{ "After careful consideration, we have decided not to move forward with your application at this time." }}
+                            </div>
+                          </div>
+                          
+                          <div class="d-flex mb-2"  *ngIf="!(item.Not_Decide || item.Cancel_It  || item.IsSelected || item.IsRejected)">
+                            <div class="border rounded min-w-125px px-1 mb-3" >
+                              <div class="d-flex align-items-center">
+                                <div class=" fw-bolder counted fs-6 text-hover-primary fw-bolder cursor-pointer"  data-kt-countup="true"
+                                  data-kt-countup-value="15000" data-kt-countup-prefix="$"
+                                  (click)="changerequest(item.InterviewID)" style="cursor: pointer; text-align: center;padding: 5px;">
+                                  Change Request
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex mb-2" style="padding-left:5px;" *ngIf="!(item.Not_Decide || item.Cancel_It  || item.IsSelected || item.IsRejected)">
+                                <button class="btn btn-sm btn-primary fs-7 fw-bolder pb-2 cursor-pointer border rounded "
+                                  (click)="Confirmation(item.InterviewID,item.Rel_Tal_Pro_Id,item.ProjectId,item.JobsId,item.TalentId,item.UserId,item.CreatedBy)" style="cursor: pointer;">Confirm</button>
+                              </div>
+                          </div>
+                        
+                        </div>
+                        <div class="d-flex  flex-wrap mb-2">
+                          <div class="d-flex mb-2">
+                            <div class="d-flex flex-wrap justify-content-start me-7">
+                              <div class="d-flex flex-wrap">
+                             
+                                <div class="d-flex flex-column border border-gray-700 border-dashed rounded min-w-125px px-4 py-2">
+<!--                                 
+                                  <div class="d-flex align-items-center">
+                                    <div class="fs-7 fw-bolder">
+                                    </div>
+                                  </div>
+                               -->
+                              <h6>
+                                Date :{{
+                                  item.Interview_Date | date : "dd MMM, yyyy" }}
+                              </h6>
+
+                                  <div class="fw-bold fs-7 text-gray-400 px-1">Time:
+                                    {{item.Interview_Date | date:'h:mm a' }}</div>
+                                </div>
+                              </div>
+                             
+                            </div>
+                            <div class="d-flex flex-column border border-gray-700 border-dashed rounded min-w-125px px-4 py-2">
+                              <h6> Round  : </h6>
+                                <div class="fw-bold fs-7 text-gray-400">{{ item.RoundName }}</div>
+                              </div>
+                              </div>
+                           
+                            <div class="d-flex mb-2">
+                              <div class="d-flex flex-wrap justify-content-start">
+                                <div class="d-flex flex-wrap">
+                                  <div class="d-flex flex-column border border-gray-700 border-dashed rounded min-w-125px px-4 py-2">   
+                                 <h6> Name : </h6>
+                                    <div class="fw-bold fs-7 text-gray-400 ">{{item.UserName }}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          
+                          
+                        </div>
+                      </div>
+                    
+                    </div>
+                    
+                    <div class="row">
+                   
+                      <div class="col-md-6">
+                        <div class="d-flex">
+                          <h6 style="padding:7px">Primary Skill : </h6>
+  
+                          <div *ngIf="item.PrimarySkillName != '' && item.PrimarySkillName != null">
+                            <div class="d-flex flex-wrap fw-bold fs-7 pe-2">
+                              <span class="badge me-2 mb-2 rounded" style="font-size:12px"
+                                *ngFor="let item of item.PrimarySkillName.split(',');let i = index"
+                                [ngClass]="colors[i % colors.length]">{{ item }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                    </div>
+               
+  
+                      </div>
+                  </div>
+  
+                 
+  
+              </div>
+          </div>
+      </div>
+  </div>
+

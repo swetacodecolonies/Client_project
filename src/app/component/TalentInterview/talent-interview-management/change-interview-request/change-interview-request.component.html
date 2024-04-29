@@ -1,0 +1,99 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title fs-5">Add Label</h3>
+      <button class="btn-close" type="button" (click)="activeModal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <form  name="addForm" role="form" #changeRequestForm="ngForm" (ngSubmit)="Create()">
+        <div class="row g-sm-3 g-2 custom-input">
+          <label class="col-3 col-form-label" for="Label_Modal">Prefer Date :</label>
+          <div class="col-9">
+            <input class="form-control" id="Label_Modal" type="date" name="NewPreferDate" [(ngModel)]="requestmodal.NewPreferDate"  [min]="maxDate"  (ngModelChange)="requestmodal.NewPreferDate = $event" #NewPreferDate="ngModel" required >
+            <div class="fv-plugins-message-container invalid-feedback"
+            *ngIf="(NewPreferDate.touched || changeRequestForm.submitted) && NewPreferDate.errors?.['required']">
+            <small class="text-error">Prefer Date is required .</small>
+          </div>
+          </div>
+          <label class="col-3 col-form-label" for="Email_Modal">Prefer Time :</label>
+          <div class="col-9">
+            <input class="form-control" id="Email_Modal" type="time" name="NewPreferTime" [(ngModel)]="requestmodal.NewPreferTime" (ngModelChange)="onTimeChange($event)" #NewpreferTime="ngModel" required>
+            <div 
+            *ngIf="(NewpreferTime.touched ) && NewpreferTime.errors?.['required']">
+            <small class="text-error">Prefer Time is required .</small>
+          </div>
+            <div *ngIf="showTimeError && NewpreferTime.touched">
+          <small class="text-error">Prefer Time can not be in the past .</small>
+              </div>
+          </div>
+          <label class="form-label col-3" for="exampleColorInput">Add Remark :</label>
+          <div class="col-9">
+            <textarea  class="form-control" id="exampleColorInput" type="text" name="Remarks" [(ngModel)]="requestmodal.Remarks"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-light" type="button"  (click)="activeModal.dismiss()">Cancel</button>
+      <button class="btn btn-primary" type="button" (click)="Create()" [disabled]="changeRequestForm.invalid" >Add</button>
+    </div>
+  </div>
+
+
+<!-- <div class="modal-content">
+    <div class="modal-header" style="background-color: #009EF7; ">
+      <h5 class="modal-title" style="color: #ffff;">Change Request</h5>
+      <button type="button" class="btn-close clsbtn" aria-label="Close"
+        (click)=" closemodel()"></button>
+    </div>
+    <div class="modal-body">
+      <form name="addForm" role="form" #CompanyForm="ngForm" (ngSubmit)="Create()">
+        <div  clss="row "style="display: flex;">
+          <div class="col-md-6" style="margin-left: 120px;">
+            <div class="d-flex flex-column col-md-6 col-n">
+              <div class=" fv-row mb-7 fv-plugins-icon-container">
+                <label class="fs-6 fw-bold form-label mt-3" style="margin-bottom: 1.5rem;">
+                  <span class="required">Prefer Date - Time</span>
+                </label>
+                <div class="border" >
+                  <dl-date-time-picker  formControlName="selectedDate" ng-model="selectedDate"  
+                   name="selectedDate"  
+                   >
+                   <div class="fv-plugins-message-container invalid-feedback" *ngIf="(this.isValid)">
+                    <small class="text-danger">dDate and time is required</small>
+                  </div>
+                  </dl-date-time-picker>
+                  
+                </div>
+               
+              </div>
+              
+            </div>
+          
+          </div>
+          <div class="col-md" style="margin-right: 150px;">
+         
+            <div class="form-group" >
+              <label for="recipient-name" class="col-form-label">Remark</label>
+              <textarea type="text" formControlName="Remarks" ng-model="Remark" class="form-control" name="Remark" required="true"></textarea>
+              <div class="fv-plugins-message-container invalid-feedback" *ngIf="(this.isValid)">
+                <small class="text-danger">remark is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </form>
+    </div>
+    <div className="modal-footer">
+      <div class="text-center">
+        <button type="reset" id="kt_modal_new_target_cancel" class="btn btn-light me-3"
+          (click)=" closemodel()">Cancel</button>
+        <button type="button" id="kt_modal_new_target_submit" class="btn btn-primary" (click)="Create()">
+          <span class="indicator-label">Submit</span>
+          <span class="indicator-progress">Please wait...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+        </button>
+      </div>
+    </div>
+    <br />
+  </div> -->

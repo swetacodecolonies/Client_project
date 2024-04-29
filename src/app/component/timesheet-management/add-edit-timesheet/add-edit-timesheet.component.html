@@ -1,0 +1,261 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h3 class="modal-title fs-5">Add Timesheet</h3>
+    <button class="btn-close" type="button" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form id="kt_ecommerce_settings_general_form" class="form fv-plugins-bootstrap5 fv-plugins-framework"
+    novalidate="novalidate" #timesheetForm="ngForm" (ngSubmit)="timesheetForm.form.valid" novalidate>
+    <div class="">
+      <div class="row">
+        <!-- <div class="row col-lg-6 fv-row">
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 fw-bold form-label mt-3">
+                <span class="required">TimeSheet Date </span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                  data-bs-original-title="Select the date." aria-label="select the date."></i>
+              </label>
+              <input type="date" [max]="maxDate" class="form-control form-control-solid" name="TimeSheetDate" value=""
+                [(ngModel)]="timesheetmodel.TimeSheetDate" #TimeSheetDate="ngModel" required />
+              <div *ngIf="(TimeSheetDate.touched || timesheetForm.submitted) && TimeSheetDate.errors?.['required']">
+                <small class="text-error">TimeSheet Date is required</small>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="row col-lg-10 fv-row">
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 fw- form-label mt-3">
+                <span class="required">Project Name</span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                  data-bs-original-title="Select Project." aria-label="select project."></i>
+              </label>
+              <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                data-placeholder="Select..." #timesheet_project="ngModel" required name="timesheet_project"
+                [(ngModel)]="timesheetmodel.ProjectId" (ngModelChange)="selectProject()">
+                <option value="0">Select Project</option>
+                <option value="{{ f.ProjectId }}" *ngFor="let f of projectList ">{{ f.ProjectName }}</option>
+              </select>
+              <div *ngIf="(timesheet_project.touched || timesheetForm.submitted) && timesheet_project.errors?.['required']">
+                <small class="text-error">Project Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngFor="let task of timesheetmodel.Timesheet_datas; let i = index; let isLast =last">
+        <div class="row col-lg-12 fv-row">
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 fw- form-label mt-3">
+                <span class="required">Task Name</span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                  aria-label="select name"></i>
+              </label>
+              <input type="text" placeholder="Enter your Task Name" class="form-control form-control-solid"
+                [(ngModel)]="task.TaskName" #TaskName="ngModel" name="TaskName{{i}}" value="" required />
+              <div  *ngIf="(TaskName.touched || timesheetForm.submitted) && TaskName.errors?.['required']">
+                <small class="text-error">Task Name is required</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 fw- form-label mt-3">
+                <span class="required">Task Description</span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                  data-bs-original-title="Select Description" aria-label="select Description"></i>
+              </label>
+              <input type="text" placeholder="Enter your Description" class="form-control form-control-solid"
+                [(ngModel)]="task.TaskDescription" #TaskDescription="ngModel" name="TaskDescription {{i}}" value=""
+                required  minlength="30"/>
+              <div *ngIf="(TaskDescription.touched || timesheetForm.submitted) && TaskDescription.errors?.['required']">
+                <small class="text-error">Task Description is required</small>
+              </div>
+              <div class="fv-plugins-message-container invalid-feedback"
+              *ngIf="taskDescriptionInvalid(i)" >
+              <small class="text-error">Task Description must be at least 30 characters</small>
+            </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 fw- form-label mt-3">
+                <span class="required">Task Status</span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                  data-bs-original-title="Select status" aria-label="select status"></i>
+              </label>
+              <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                placeholder="Select Experience" name="settings_Experience {{i}}" [(ngModel)]="task.TaskStatus"
+                #TaskStatus="ngModel" required>
+                <option value="0">Select Task Status</option>
+                <option value="true">Done</option>
+                <option value="false">In-Progress</option>
+              </select>
+              <div  *ngIf="(TaskStatus.touched || timesheetForm.submitted) && TaskStatus.errors?.['required']">
+                <small class="text-error">Task Status is required</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="fv-row mb-7 fv-plugins-icon-container">
+              <label class="fs-6 form-label mt-3">
+                <span class="required"> Total Hours</span>
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
+              </label>
+              <input type="number" placeholder="Enter your Hours" class="form-control form-control-solid"
+                [(ngModel)]="task.TotalHours" #TotalHours="ngModel" name="TotalHours{{i}}" value="" required/>
+                <div *ngIf="(TotalHours.touched || timesheetForm.submitted) && TotalHours.errors?.['required']">
+                <small class="text-error">Total Hours is required</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="fv-row mb-4 col-2" style="display:flex; margin-top:39px;">
+            <!-- <button (click)="deleteRoleRow(i)" 
+            style="font-size: 36px;margin-right:30px;"
+            [ngStyle]="{'cursor': timesheetmodel.Timesheet_datas.length > 1 ? 'pointer' : 'not-allowed'}"> + </button> -->
+            <i (click)="deleteRoleRow(i)" class="icofont icofont-close-squared-alt"
+              style="font-size: 36px;margin-right:30px;"
+              [ngStyle]="{'cursor': timesheetmodel.Timesheet_datas.length > 1 ? 'pointer' : 'not-allowed'}"></i>
+            <br>
+            <i (click)="addNewRoleRow()" class="icofont icofont-plus-square" 
+              style="font-size: 36px;cursor: pointer;" *ngIf="isLast"></i>
+          </div>
+        </div>
+      </div>
+
+    
+    </div>
+    <div class="separator mb-6"></div>
+    <div class="d-flex justify-content-end">
+      <button type="button" data-kt-contacts-type="cancel" class="btn btn-light fs-6 fw-bolder pb-2 cursor-pointer">
+        Cancel
+      </button>
+      <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary mx-2 fs-6 fw-bolder pb-2 cursor-pointer"  (click)="submit()" [disabled]="timesheetForm.form.invalid">
+      Save
+        
+      </button>
+    </div>
+    <div></div>
+  </form>
+ 
+  </div>
+  <!-- <script src="../../../../assets/js/custom/apps/contacts/edit-contact.js"></script> -->
+                <!-- <div class="row">
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Monday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select the date." aria-label="select the date."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Monday" value="" [(ngModel)]="timesheetmodel.Monday"
+                          (ngModelChange)="totalHours()" #monday="ngModel"
+                           />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Tuesday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Tuesday" value=""(ngModelChange)="totalHours()"
+                          [(ngModel)]="timesheetmodel.Tuesday"  #tuesday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Wednesday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Wednesday" value="" [(ngModel)]="timesheetmodel.Wednesday"
+                          (ngModelChange)="totalHours()" #wednesday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Thursday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Thursday" value="" [(ngModel)]="timesheetmodel.Thursday" 
+                          (ngModelChange)="totalHours()"  #thursday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Friday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Friday" value=""  [(ngModel)]="timesheetmodel.Friday" 
+                          (ngModelChange)="totalHours()" #friday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Saturday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step=".01" placeholder="0.00" class="form-control form-control-solid"
+                          name="Saturday" value="" [(ngModel)]="timesheetmodel.Saturday" 
+                          (ngModelChange)="totalHours()"  #Saturday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-2 fv-row">
+                    <div class="col">
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="fs-6 fw-bold form-label mt-3">
+                          <span class="required">Sunday</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Select Project." aria-label="select project."></i>
+                        </label>
+                        <input type="number" step="any" placeholder="0.00" class="form-control form-control-solid"
+                          name="Sunday" value=""  [(ngModel)]="timesheetmodel.Sunday"
+                          (ngModelChange)="totalHours()" #Sunday="ngModel" />
+  
+                      </div>
+                    </div>
+                  </div>
+                </div>  -->
+  
+  
+              

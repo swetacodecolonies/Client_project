@@ -1,0 +1,5 @@
+.disabled-link {
+    pointer-events: none; /* Disable click events */
+    opacity: 0.5; /* Adjust opacity to indicate disabled state */
+    /* You can add other styles to visually indicate disabled state */
+  }
